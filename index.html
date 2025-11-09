@@ -4,22 +4,23 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Стильная обувь - Карточка товара</title>
+	<title>NewRock - Стильная обувь</title>
 	<style>
 		* {
 			margin: 0;
 			padding: 0;
 			box-sizing: border-box;
-			font-family: 'Arial', sans-serif;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		}
 
 		body {
-			background-color: #f5f5f5;
+			background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			min-height: 100vh;
 			padding: 20px;
+			color: #fff;
 		}
 
 		.container {
@@ -28,34 +29,70 @@
 			display: grid;
 			grid-template-columns: 1fr;
 			gap: 40px;
-			padding: 20px;
 		}
 
-		@media (min-width: 768px) {
+		@media (min-width: 992px) {
 			.container {
 				grid-template-columns: 1fr 1fr;
 			}
 		}
 
+		.header {
+			text-align: center;
+			margin-bottom: 20px;
+			grid-column: 1 / -1;
+		}
+
+		.header h1 {
+			font-size: 42px;
+			color: #fff;
+			margin-bottom: 10px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+		}
+
+		.header p {
+			color: #a0a0a0;
+			font-size: 18px;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
 		.shoe-card {
-			background: white;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(10px);
 			border-radius: 20px;
 			overflow: hidden;
-			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-			max-width: 400px;
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+			transition: transform 0.4s ease, box-shadow 0.4s ease;
+			max-width: 500px;
 			margin: 0 auto;
+			border: 1px solid rgba(255, 255, 255, 0.1);
 		}
 
 		.shoe-card:hover {
 			transform: translateY(-10px);
-			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+		}
+
+		.brand {
+			background: rgba(0, 0, 0, 0.3);
+			padding: 15px;
+			text-align: center;
+		}
+
+		.brand h2 {
+			font-size: 32px;
+			letter-spacing: 3px;
+			color: #fff;
+			text-transform: uppercase;
 		}
 
 		.shoe-image {
 			width: 100%;
-			height: 300px;
-			background: linear-gradient(135deg, #d2e6ff, #a8c8ff);
+			height: 350px;
+			background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -64,11 +101,16 @@
 		}
 
 		.shoe-image img {
-			max-width: 90%;
-			max-height: 90%;
+			max-width: 85%;
+			max-height: 85%;
 			object-fit: contain;
-			transform: rotate(-10deg);
-			filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+			filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+			transform: rotate(-5deg);
+			transition: transform 0.5s ease;
+		}
+
+		.shoe-card:hover .shoe-image img {
+			transform: rotate(0deg) scale(1.05);
 		}
 
 		.shoe-details {
@@ -78,32 +120,32 @@
 		.shoe-title {
 			font-size: 24px;
 			font-weight: bold;
-			margin-bottom: 10px;
-			color: #333;
+			margin-bottom: 15px;
+			color: #fff;
 		}
 
 		.shoe-description {
-			color: #666;
+			color: #b0b0b0;
 			margin-bottom: 20px;
-			line-height: 1.5;
+			line-height: 1.6;
 		}
 
 		.price-section {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			margin-bottom: 20px;
+			margin-bottom: 25px;
 		}
 
 		.price {
-			font-size: 28px;
+			font-size: 32px;
 			font-weight: bold;
-			color: #2c5aa0;
+			color: #4e9af1;
 		}
 
 		.old-price {
-			font-size: 18px;
-			color: #999;
+			font-size: 20px;
+			color: #888;
 			text-decoration: line-through;
 			margin-right: 10px;
 		}
@@ -111,48 +153,54 @@
 		.discount {
 			background: #ff4757;
 			color: white;
-			padding: 5px 10px;
+			padding: 8px 15px;
 			border-radius: 20px;
-			font-size: 14px;
+			font-size: 16px;
 			font-weight: bold;
 		}
 
 		.size-section {
-			margin-bottom: 20px;
+			margin-bottom: 25px;
 		}
 
 		.size-title {
-			font-size: 16px;
-			margin-bottom: 10px;
-			color: #333;
+			font-size: 18px;
+			margin-bottom: 15px;
+			color: #fff;
+			text-transform: uppercase;
+			letter-spacing: 1px;
 		}
 
 		.sizes {
 			display: flex;
-			gap: 10px;
+			gap: 12px;
 			flex-wrap: wrap;
 		}
 
 		.size {
-			width: 40px;
-			height: 40px;
+			width: 50px;
+			height: 50px;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			border: 1px solid #ddd;
-			border-radius: 8px;
+			border: 2px solid rgba(255, 255, 255, 0.2);
+			border-radius: 10px;
 			cursor: pointer;
-			transition: all 0.2s ease;
+			transition: all 0.3s ease;
+			font-weight: bold;
+			background: rgba(255, 255, 255, 0.05);
 		}
 
 		.size:hover {
-			border-color: #2c5aa0;
+			border-color: #4e9af1;
+			background: rgba(78, 154, 241, 0.1);
 		}
 
 		.size.selected {
-			background: #2c5aa0;
+			background: #4e9af1;
 			color: white;
-			border-color: #2c5aa0;
+			border-color: #4e9af1;
+			transform: scale(1.1);
 		}
 
 		.action-buttons {
@@ -162,56 +210,64 @@
 
 		.btn {
 			flex: 1;
-			padding: 15px;
+			padding: 16px;
 			border: none;
-			border-radius: 10px;
+			border-radius: 12px;
 			font-weight: bold;
 			cursor: pointer;
 			transition: all 0.3s ease;
 			font-size: 16px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
 		}
 
 		.btn-primary {
-			background: #2c5aa0;
+			background: linear-gradient(135deg, #4e9af1 0%, #3578c7 100%);
 			color: white;
 		}
 
 		.btn-primary:hover {
-			background: #1e3d72;
+			background: linear-gradient(135deg, #3578c7 0%, #2a65b0 100%);
+			transform: translateY(-3px);
+			box-shadow: 0 5px 15px rgba(78, 154, 241, 0.4);
 		}
 
 		.btn-secondary {
-			background: #f1f1f1;
-			color: #333;
+			background: rgba(255, 255, 255, 0.1);
+			color: #fff;
+			border: 1px solid rgba(255, 255, 255, 0.2);
 		}
 
 		.btn-secondary:hover {
-			background: #e1e1e1;
+			background: rgba(255, 255, 255, 0.2);
+			transform: translateY(-3px);
 		}
 
 		.info-section {
 			padding: 40px;
-			background: white;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(10px);
 			border-radius: 20px;
-			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+			border: 1px solid rgba(255, 255, 255, 0.1);
 		}
 
 		.info-title {
 			font-size: 32px;
 			margin-bottom: 20px;
-			color: #333;
+			color: #fff;
 		}
 
 		.info-text {
-			line-height: 1.6;
-			color: #555;
+			line-height: 1.7;
+			color: #b0b0b0;
 			margin-bottom: 20px;
 		}
 
 		.features {
 			display: grid;
 			grid-template-columns: 1fr;
-			gap: 15px;
+			gap: 20px;
 			margin-top: 30px;
 		}
 
@@ -225,39 +281,42 @@
 			display: flex;
 			align-items: center;
 			gap: 15px;
+			padding: 15px;
+			background: rgba(255, 255, 255, 0.05);
+			border-radius: 12px;
+			transition: transform 0.3s ease;
+		}
+
+		.feature:hover {
+			transform: translateX(5px);
+			background: rgba(255, 255, 255, 0.08);
 		}
 
 		.feature-icon {
 			width: 50px;
 			height: 50px;
-			background: #d2e6ff;
+			background: linear-gradient(135deg, #4e9af1 0%, #3578c7 100%);
 			border-radius: 50%;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			color: #2c5aa0;
+			color: white;
 			font-size: 20px;
 		}
 
 		.feature-text {
 			font-weight: 500;
+			color: #fff;
 		}
 
-		.header {
+		.footer {
+			grid-column: 1 / -1;
 			text-align: center;
-			margin-bottom: 40px;
-			width: 100%;
-		}
-
-		.header h1 {
-			font-size: 36px;
-			color: #333;
-			margin-bottom: 10px;
-		}
-
-		.header p {
-			color: #666;
-			font-size: 18px;
+			margin-top: 40px;
+			padding: 20px;
+			color: #a0a0a0;
+			font-size: 14px;
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
 		}
 	</style>
 </head>
@@ -265,37 +324,65 @@
 <body>
 	<div class="container">
 		<div class="header">
-			<h1>Стильная обувь для прогулки</h1>
-			<p>Откройте для себя комфорт и стиль в каждой паре</p>
+			<h1>NewRock</h1>
+			<p>Прочная, стильная и комфортная обувь для тех, кто ценит качество и индивидуальность</p>
 		</div>
 
 		<div class="shoe-card">
+			<div class="brand">
+				<h2>NewRock</h2>
+			</div>
 			<div class="shoe-image">
-				<!-- В реальном проекте здесь будет изображение обуви -->
-				<div
-					style="width: 250px; height: 180px; background: #333; border-radius: 20px; transform: rotate(-10deg); position: relative;">
-					<div
-						style="position: absolute; top: 20px; left: 20px; width: 200px; height: 80px; background: #555; border-radius: 10px;">
-					</div>
-					<div
-						style="position: absolute; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #777; border-radius: 50%;">
-					</div>
-				</div>
+				<!-- Изображение обуви NewRock -->
+        
+					<img src=""
+					<!-- Основа обуви -->
+					<path
+						d="M50,120 Q100,80 150,100 Q200,120 250,100 L270,130 Q250,160 200,170 Q150,180 100,170 Q50,160 30,130 Z"
+						fill="#333" stroke="#555" stroke-width="2" />
+
+					<!-- Носок -->
+					<path d="M50,120 Q70,100 90,110 Q110,120 130,115 Q150,110 170,115 Q190,120 210,110 Q230,100 250,100"
+						fill="#222" stroke="#444" stroke-width="2" />
+
+					<!-- Язычок -->
+					<path d="M130,115 Q150,100 170,115 L170,140 Q150,125 130,140 Z" fill="#444" stroke="#555"
+						stroke-width="1" />
+
+					<!-- Шнуровка -->
+					<path d="M110,125 Q130,110 150,120 Q170,130 190,120" stroke="#888" stroke-width="3" fill="none" />
+					<path d="M115,135 Q135,120 155,130 Q175,140 195,130" stroke="#888" stroke-width="3" fill="none" />
+
+					<!-- Подошва -->
+					<path
+						d="M30,130 Q50,150 100,160 Q150,170 200,160 Q250,150 270,130 L280,140 Q260,170 200,180 Q140,190 80,180 Q20,170 20,140 Z"
+						fill="#111" stroke="#333" stroke-width="2" />
+
+					<!-- Металлические элементы -->
+					<circle cx="180" cy="125" r="8" fill="#4e9af1" />
+					<circle cx="120" cy="130" r="8" fill="#4e9af1" />
+
+					<!-- Логотип NewRock -->
+					<text x="150" y="50" text-anchor="middle" fill="#4e9af1" font-family="Arial" font-size="24"
+						font-weight="bold">NEWROCK</text>
+				</svg>
 			</div>
 			<div class="shoe-details">
-				<h2 class="shoe-title">Массивные кроссовки NewRock</h2>
-				<p class="shoe-description">Хорошие,крутые,y2k</p>
+				<h2 class="shoe-title">Кожаные ботинки NewRock M-1234</h2>
+				<p class="shoe-description">Прочные кожаные ботинки с металлическими вставками. Идеальное сочетание
+					стиля, комфорта и долговечности. Подошва из высококачественной резины обеспечивает отличное
+					сцепление.</p>
 
 				<div class="price-section">
 					<div>
-						<span class="old-price">7 499 ₽</span>
-						<span class="price">5 999 ₽</span>
+						<span class="old-price">12 499 ₽</span>
+						<span class="price">9 999 ₽</span>
 					</div>
 					<div class="discount">-20%</div>
 				</div>
 
 				<div class="size-section">
-					<div class="size-title">Выберите размер:</div>
+					<div class="size-title">Размеры</div>
 					<div class="sizes">
 						<div class="size">38</div>
 						<div class="size">39</div>
@@ -307,35 +394,47 @@
 				</div>
 
 				<div class="action-buttons">
-					<button class="btn btn-primary">Добавить в корзину</button>
-					<button class="btn btn-secondary">В избранное</button>
+					<button class="btn btn-primary">Купить сейчас</button>
+					<button class="btn btn-secondary">В корзину</button>
 				</div>
 			</div>
 		</div>
 
 		<div class="info-section">
-			<h2 class="info-title">Почему выбирают наши кроссовки?</h2>
-			<p class="info-text">Наши кроссовки созданы с учетом последних технологий в области комфорта и поддержки
-				стопы. Идеально подходят для активного образа жизни, занятий спортом и повседневной носки.</p>
+			<h2 class="info-title">Особенности обуви NewRock</h2>
+			<p class="info-text">Ботинки NewRock созданы для тех, кто ценит прочность, стиль и комфорт. Каждая пара
+				изготавливается с использованием высококачественных материалов и передовых технологий.</p>
 
 			<div class="features">
 				<div class="feature">
 					<div class="feature-icon">✓</div>
-					<div class="feature-text">Технология амортизации</div>
+					<div class="feature-text">Натуральная кожа высшего качества</div>
 				</div>
 				<div class="feature">
 					<div class="feature-icon">✓</div>
-					<div class="feature-text">Дышащие материалы</div>
+					<div class="feature-text">Прочная резиновая подошва</div>
 				</div>
 				<div class="feature">
 					<div class="feature-icon">✓</div>
-					<div class="feature-text">Поддержка свода стопы</div>
+					<div class="feature-text">Металлические декоративные элементы</div>
 				</div>
 				<div class="feature">
 					<div class="feature-icon">✓</div>
-					<div class="feature-text">Стильный дизайн</div>
+					<div class="feature-text">Усиленная конструкция для долговечности</div>
+				</div>
+				<div class="feature">
+					<div class="feature-icon">✓</div>
+					<div class="feature-text">Анатомическая стелька для комфорта</div>
+				</div>
+				<div class="feature">
+					<div class="feature-icon">✓</div>
+					<div class="feature-text">Стильный дизайн для любого образа</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="footer">
+			<p>© 2023 NewRock. Все права защищены.</p>
 		</div>
 	</div>
 
@@ -352,15 +451,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             const elements = document.querySelectorAll('.shoe-card, .info-section');
             elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
                 setTimeout(() => {
-                    el.style.opacity = '0';
-                    el.style.transform = 'translateY(20px)';
-                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    
-                    setTimeout(() => {
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateY(0)';
-                    }, 100);
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
                 }, index * 200);
             });
         });
