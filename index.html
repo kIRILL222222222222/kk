@@ -1,1 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Стильная обувь - Карточка товара</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Arial', sans-serif;
+		}
+
+		body {
+			background-color: #f5f5f5;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			padding: 20px;
+		}
+
+		.container {
+			max-width: 1200px;
+			width: 100%;
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 40px;
+			padding: 20px;
+		}
+
+		@media (min-width: 768px) {
+			.container {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		.shoe-card {
+			background: white;
+			border-radius: 20px;
+			overflow: hidden;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			max-width: 400px;
+			margin: 0 auto;
+		}
+
+		.shoe-card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+		}
+
+		.shoe-image {
+			width: 100%;
+			height: 300px;
+			background: linear-gradient(135deg, #d2e6ff, #a8c8ff);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.shoe-image img {
+			max-width: 90%;
+			max-height: 90%;
+			object-fit: contain;
+			transform: rotate(-10deg);
+			filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+		}
+
+		.shoe-details {
+			padding: 25px;
+		}
+
+		.shoe-title {
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 10px;
+			color: #333;
+		}
+
+		.shoe-description {
+			color: #666;
+			margin-bottom: 20px;
+			line-height: 1.5;
+		}
+
+		.price-section {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		.price {
+			font-size: 28px;
+			font-weight: bold;
+			color: #2c5aa0;
+		}
+
+		.old-price {
+			font-size: 18px;
+			color: #999;
+			text-decoration: line-through;
+			margin-right: 10px;
+		}
+
+		.discount {
+			background: #ff4757;
+			color: white;
+			padding: 5px 10px;
+			border-radius: 20px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		.size-section {
+			margin-bottom: 20px;
+		}
+
+		.size-title {
+			font-size: 16px;
+			margin-bottom: 10px;
+			color: #333;
+		}
+
+		.sizes {
+			display: flex;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.size {
+			width: 40px;
+			height: 40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: all 0.2s ease;
+		}
+
+		.size:hover {
+			border-color: #2c5aa0;
+		}
+
+		.size.selected {
+			background: #2c5aa0;
+			color: white;
+			border-color: #2c5aa0;
+		}
+
+		.action-buttons {
+			display: flex;
+			gap: 15px;
+		}
+
+		.btn {
+			flex: 1;
+			padding: 15px;
+			border: none;
+			border-radius: 10px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-size: 16px;
+		}
+
+		.btn-primary {
+			background: #2c5aa0;
+			color: white;
+		}
+
+		.btn-primary:hover {
+			background: #1e3d72;
+		}
+
+		.btn-secondary {
+			background: #f1f1f1;
+			color: #333;
+		}
+
+		.btn-secondary:hover {
+			background: #e1e1e1;
+		}
+
+		.info-section {
+			padding: 40px;
+			background: white;
+			border-radius: 20px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+		}
+
+		.info-title {
+			font-size: 32px;
+			margin-bottom: 20px;
+			color: #333;
+		}
+
+		.info-text {
+			line-height: 1.6;
+			color: #555;
+			margin-bottom: 20px;
+		}
+
+		.features {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 15px;
+			margin-top: 30px;
+		}
+
+		@media (min-width: 576px) {
+			.features {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		.feature {
+			display: flex;
+			align-items: center;
+			gap: 15px;
+		}
+
+		.feature-icon {
+			width: 50px;
+			height: 50px;
+			background: #d2e6ff;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: #2c5aa0;
+			font-size: 20px;
+		}
+
+		.feature-text {
+			font-weight: 500;
+		}
+
+		.header {
+			text-align: center;
+			margin-bottom: 40px;
+			width: 100%;
+		}
+
+		.header h1 {
+			font-size: 36px;
+			color: #333;
+			margin-bottom: 10px;
+		}
+
+		.header p {
+			color: #666;
+			font-size: 18px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>Стильная обувь для прогулки</h1>
+			<p>Откройте для себя комфорт и стиль в каждой паре</p>
+		</div>
+
+		<div class="shoe-card">
+			<div class="shoe-image">
+				<!-- В реальном проекте здесь будет изображение обуви -->
+				<div
+					style="width: 250px; height: 180px; background: #333; border-radius: 20px; transform: rotate(-10deg); position: relative;">
+					<div
+						style="position: absolute; top: 20px; left: 20px; width: 200px; height: 80px; background: #555; border-radius: 10px;">
+					</div>
+					<div
+						style="position: absolute; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #777; border-radius: 50%;">
+					</div>
+				</div>
+			</div>
+			<div class="shoe-details">
+				<h2 class="shoe-title">Массивные кроссовки NewRock</h2>
+				<p class="shoe-description">Хорошие,крутые,y2k</p>
+
+				<div class="price-section">
+					<div>
+						<span class="old-price">7 499 ₽</span>
+						<span class="price">5 999 ₽</span>
+					</div>
+					<div class="discount">-20%</div>
+				</div>
+
+				<div class="size-section">
+					<div class="size-title">Выберите размер:</div>
+					<div class="sizes">
+						<div class="size">38</div>
+						<div class="size">39</div>
+						<div class="size selected">40</div>
+						<div class="size">41</div>
+						<div class="size">42</div>
+						<div class="size">43</div>
+					</div>
+				</div>
+
+				<div class="action-buttons">
+					<button class="btn btn-primary">Добавить в корзину</button>
+					<button class="btn btn-secondary">В избранное</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="info-section">
+			<h2 class="info-title">Почему выбирают наши кроссовки?</h2>
+			<p class="info-text">Наши кроссовки созданы с учетом последних технологий в области комфорта и поддержки
+				стопы. Идеально подходят для активного образа жизни, занятий спортом и повседневной носки.</p>
+
+			<div class="features">
+				<div class="feature">
+					<div class="feature-icon">✓</div>
+					<div class="feature-text">Технология амортизации</div>
+				</div>
+				<div class="feature">
+					<div class="feature-icon">✓</div>
+					<div class="feature-text">Дышащие материалы</div>
+				</div>
+				<div class="feature">
+					<div class="feature-icon">✓</div>
+					<div class="feature-text">Поддержка свода стопы</div>
+				</div>
+				<div class="feature">
+					<div class="feature-icon">✓</div>
+					<div class="feature-text">Стильный дизайн</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Выбор размера обуви
+        document.querySelectorAll('.size').forEach(size => {
+            size.addEventListener('click', function() {
+                document.querySelectorAll('.size').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        // Анимация появления элементов
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.shoe-card, .info-section');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+	</script>
+</body>
+
+</html>
