@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Чебоксары - интересные факты</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -16,6 +17,7 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -24,24 +26,106 @@
             padding: 0 20px;
         }
         
+        /* Анимированный фон */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(-45deg, #1e3c72, #2a5298, #4a6fa5, #6d9dc5);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Плавающие частицы */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: rgba(30, 60, 114, 0.9);
             color: white;
             padding: 2rem 0;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid #f1c40f;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            100% { transform: translateX(100%); }
         }
         
         h1 {
             font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #f1c40f;
+            border-radius: 2px;
         }
         
         .subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 1rem auto 0;
+            animation: fadeIn 2s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 0.9; transform: translateY(0); }
         }
         
         .content {
@@ -49,36 +133,50 @@
         }
         
         .fact-section {
-            background: white;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
             padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .fact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #2a5298, #e74c3c);
         }
         
         .fact-section:hover {
-            transform: translateY(-5px);
-        }
-        
-        .fact-section:nth-child(odd) {
-            border-left: 5px solid #2a5298;
-        }
-        
-        .fact-section:nth-child(even) {
-            border-left: 5px solid #e74c3c;
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
         
         h2 {
             color: #2a5298;
             margin-bottom: 1.2rem;
             font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            color: #e74c3c;
         }
         
         h3 {
             color: #e74c3c;
             margin: 1.5rem 0 0.8rem 0;
             font-size: 1.4rem;
+            border-left: 4px solid #2a5298;
+            padding-left: 10px;
         }
         
         .fact-list {
@@ -86,72 +184,313 @@
         }
         
         .fact-list li {
-            padding: 0.8rem 0;
+            padding: 1rem 0;
             border-bottom: 1px dashed #eee;
             position: relative;
-            padding-left: 1.8rem;
+            padding-left: 2.5rem;
+            transition: padding-left 0.3s ease;
+        }
+        
+        .fact-list li:hover {
+            padding-left: 3rem;
+            background-color: rgba(42, 82, 152, 0.05);
+            border-radius: 5px;
         }
         
         .fact-list li:before {
-            content: "•";
+            content: "✓";
             color: #2a5298;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
             position: absolute;
             left: 0;
-            top: 0.6rem;
+            top: 1rem;
+            background: #f1c40f;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .highlight {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            border-left: 4px solid #f1c40f;
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(42, 82, 152, 0.1));
+            padding: 1.8rem;
+            border-radius: 10px;
+            margin: 1.8rem 0;
+            border-left: 5px solid #f1c40f;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight::before {
+            content: '★';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 6rem;
+            color: rgba(241, 196, 15, 0.1);
+            transform: rotate(15deg);
         }
         
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            gap: 1.8rem;
+            margin-top: 1.8rem;
         }
         
         .stat-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 1.8rem;
+            border-radius: 12px;
             text-align: center;
-            border-top: 4px solid #2a5298;
+            border-top: 5px solid #2a5298;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #2a5298, #e74c3c);
         }
         
         .stat-value {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #2a5298;
             display: block;
             margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         .stat-label {
             font-size: 1rem;
             color: #666;
-        }
-        
-        footer {
-            background-color: #2a5298;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            font-weight: 500;
         }
         
         .quote {
             font-style: italic;
             color: #555;
-            padding: 1.5rem;
-            border-left: 4px solid #3498db;
+            padding: 2rem;
+            border-left: 5px solid #3498db;
             margin: 2rem 0;
-            background-color: #f8f9fa;
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 0 10px 10px 0;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .quote::before, .quote::after {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(52, 152, 219, 0.2);
+            position: absolute;
+        }
+        
+        .quote::before {
+            top: 10px;
+            left: 10px;
+        }
+        
+        .quote::after {
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        .author-info {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9), rgba(42, 82, 152, 0.9));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .author-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .author-name {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: #f1c40f;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .author-details {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .student-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: #f1c40f;
+            transform: translateY(-5px) rotate(10deg);
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(30, 60, 114, 0.1);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background: linear-gradient(90deg, #2a5298, #e74c3c);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #2a5298;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background: #e74c3c;
+            transform: translateY(-5px);
+        }
+        
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid #f1c40f;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 1px;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #f1c40f }
+        }
+        
+        footer {
+            background: rgba(20, 40, 80, 0.95);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+            border-top: 5px solid #f1c40f;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,100 L50,80 L100,100 Z" fill="rgba(241, 196, 15, 0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .copyright {
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            opacity: 0.8;
         }
         
         @media (max-width: 768px) {
@@ -166,13 +505,39 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .author-name {
+                font-size: 1.8rem;
+            }
+            
+            .typewriter {
+                white-space: normal;
+                border-right: none;
+                animation: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Анимированный фон -->
+    <div class="animated-bg"></div>
+    
+    <!-- Плавающие частицы -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Прогресс-бар прокрутки -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- Кнопка "Наверх" -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
     <header>
         <div class="container">
-            <h1>Чебоксары - столица Чувашии</h1>
+            <h1 class="typewriter">Чебоксары - столица Чувашии</h1>
             <p class="subtitle">Город на Волге с богатой историей, культурой и уникальными традициями</p>
         </div>
     </header>
@@ -180,7 +545,7 @@
     <main class="content">
         <div class="container">
             <section class="fact-section">
-                <h2>Общая информация</h2>
+                <h2><i class="fas fa-info-circle"></i> Общая информация</h2>
                 <p>Чебоксары — столица Чувашской Республики, расположенная на правом берегу Волги. Город известен своими живописными набережными, богатой культурой и промышленным потенциалом.</p>
                 
                 <div class="stats-grid">
@@ -204,7 +569,7 @@
             </section>
             
             <section class="fact-section">
-                <h2>Интересные факты о Чебоксарах</h2>
+                <h2><i class="fas fa-star"></i> Интересные факты о Чебоксарах</h2>
                 
                 <ul class="fact-list">
                     <li>Название города происходит от чувашского слова "Çапаçар", что означает "крепость, укреплённое поселение".</li>
@@ -219,7 +584,7 @@
             </section>
             
             <section class="fact-section">
-                <h2>Исторические факты</h2>
+                <h2><i class="fas fa-history"></i> Исторические факты</h2>
                 
                 <div class="highlight">
                     <p>Чебоксары впервые упоминаются в 1469 году в связи с походом русского войска на Казань. Однако археологические находки свидетельствуют, что поселение на этом месте существовало значительно раньше.</p>
@@ -237,7 +602,7 @@
             </section>
             
             <section class="fact-section">
-                <h2>Культура и традиции</h2>
+                <h2><i class="fas fa-monument"></i> Культура и традиции</h2>
                 
                 <div class="quote">
                     "Чувашский народ имеет богатую культуру, в которой переплетаются языческие и христианские традиции, создавая уникальное культурное наследие."
@@ -254,7 +619,7 @@
             </section>
             
             <section class="fact-section">
-                <h2>Современные достижения</h2>
+                <h2><i class="fas fa-trophy"></i> Современные достижения</h2>
                 
                 <ul class="fact-list">
                     <li>Чебоксары трижды признавались "Самым благоустроенным городом России" среди городов с населением от 100 до 500 тыс. человек.</li>
@@ -265,14 +630,168 @@
                     <li>В Чебоксарах находится самая высокая набережная Волги — её уровень на 15-20 метров выше обычных набережных волжских городов.</li>
                 </ul>
             </section>
+            
+            <!-- Блок автора -->
+            <section class="author-info">
+                <h2 class="author-name">Кочевов Кирилл Денисович</h2>
+                <p class="author-details">Ученик 9 класса, увлечённый веб-разработкой и историей родного края</p>
+                <div class="student-badge">Сайт выполнен в рамках учебного проекта</div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Портфолио">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Проекты">
+                        <i class="fas fa-code"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Контакты">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="social-link" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                
+                <p style="margin-top: 1.5rem; font-size: 1.1rem; opacity: 0.9;">
+                    Этот сайт создан с использованием HTML, CSS и JavaScript.<br>
+                    Все представленные факты тщательно проверены и подтверждены.
+                </p>
+            </section>
         </div>
     </main>
     
     <footer>
-        <div class="container">
-            <p>© 2023 Сайт о Чебоксарах. Все факты проверены.</p>
+        <div class="container footer-content">
             <p>Чебоксары — город с богатой историей и уникальной культурой, жемчужина Поволжья.</p>
+            <p class="copyright">Сайт создан с использованием современных веб-технологий</p>
         </div>
     </footer>
+
+    <script>
+        // Создание плавающих частиц
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Случайные параметры для частицы
+                const size = Math.random() * 20 + 5;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 20 + 10;
+                const animationDelay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Прогресс-бар прокрутки
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        }
+        
+        // Кнопка "Наверх"
+        function toggleScrollTopButton() {
+            const scrollTopButton = document.getElementById('scrollTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopButton.classList.add('active');
+            } else {
+                scrollTopButton.classList.remove('active');
+            }
+        }
+        
+        // Прокрутка наверх
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Анимация при прокрутке
+        function animateOnScroll() {
+            const factSections = document.querySelectorAll('.fact-section');
+            
+            factSections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.85) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Инициализация при загрузке страницы
+        window.onload = function() {
+            createParticles();
+            
+            // Изначально скрываем секции для анимации при прокрутке
+            const factSections = document.querySelectorAll('.fact-section');
+            factSections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            // Запускаем анимацию для первой секции сразу
+            setTimeout(() => {
+                if (factSections[0]) {
+                    factSections[0].style.opacity = '1';
+                    factSections[0].style.transform = 'translateY(0)';
+                }
+            }, 500);
+        };
+        
+        // События прокрутки
+        window.onscroll = function() {
+            updateProgressBar();
+            toggleScrollTopButton();
+            animateOnScroll();
+        };
+        
+        // Назначаем обработчик для кнопки "Наверх"
+        document.getElementById('scrollTop').addEventListener('click', scrollToTop);
+        
+        // Добавляем эффект наведения на карточки со статистикой
+        document.addEventListener('DOMContentLoaded', function() {
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+        
+        // Эффект для фактов при наведении
+        const factItems = document.querySelectorAll('.fact-list li');
+        factItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(42, 82, 152, 0.08)';
+                this.style.paddingLeft = '3rem';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+                this.style.paddingLeft = '2.5rem';
+            });
+        });
+    </script>
 </body>
 </html>
