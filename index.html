@@ -4,278 +4,459 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Обрабатывающая промышленность Иркутской области</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
         }
 
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding-bottom: 40px;
+            background: linear-gradient(135deg, #e6f2ff 0%, #f0f8ff 100%);
+            color: #1a3c6e;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        header {
-            background: linear-gradient(135deg, #003366 0%, #00509e 100%);
-            color: white;
-            padding: 2.5rem 1rem;
+        /* Анимированный фон */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(26, 60, 110, 0.1);
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 5%;
+            animation: float 15s infinite linear;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            left: 80%;
+            animation: float 20s infinite linear reverse;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 85%;
+            animation: float 12s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        .header-card {
+            background: white;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(26, 60, 110, 0.15);
             text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 50, 102, 0.2);
+            border: 3px solid #1a3c6e;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #1a3c6e, #4a7bc8, #1a3c6e);
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            color: #1a3c6e;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .author {
+            background: #e6f2ff;
+            padding: 10px 15px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 15px auto;
+            font-weight: bold;
+            border: 2px dashed #4a7bc8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .subject {
+            color: #4a7bc8;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .main-content {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 30px auto;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(26, 60, 110, 0.1);
+            border: 2px solid rgba(26, 60, 110, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        section {
-            background: white;
-            border-radius: 10px;
-            padding: 1.8rem;
-            margin-bottom: 1.8rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid #00509e;
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(26, 60, 110, 0.2);
+        }
+
+        .section-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #4a7bc8;
+            font-size: 1.8rem;
+            opacity: 0.7;
         }
 
         h2 {
-            color: #003366;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #eaeaea;
+            color: #1a3c6e;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e6f2ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        h3 {
-            color: #00509e;
-            margin: 1.2rem 0 0.5rem 0;
+        h2 i {
+            color: #4a7bc8;
         }
 
-        p {
-            margin-bottom: 0.8rem;
-            text-align: justify;
+        .fact-box {
+            background: #f0f8ff;
+            border-left: 5px solid #4a7bc8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+            font-weight: bold;
         }
 
         ul {
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
+            padding-left: 20px;
+            margin: 15px 0;
         }
 
         li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        li::before {
+            content: '▸';
+            color: #4a7bc8;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
         }
 
         .highlight {
-            background-color: #e8f4ff;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-            border-left: 3px solid #00509e;
+            background: linear-gradient(90deg, #e6f2ff, #f0f8ff);
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px dotted #4a7bc8;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+        .industry-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .stat-card {
-            background: #f0f8ff;
-            border-radius: 8px;
-            padding: 1.2rem;
-            text-align: center;
-            border-top: 4px solid #003366;
-        }
-
-        .stat-card h4 {
-            color: #003366;
-            margin-bottom: 0.5rem;
-        }
-
-        .industry-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.2rem;
-            margin-top: 1rem;
-        }
-
-        .industry-item {
-            background: #f9f9f9;
-            padding: 1.2rem;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .industry-item h4 {
-            color: #d35400;
-            margin-bottom: 0.7rem;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            color: #666;
-            font-size: 0.9rem;
-            border-top: 1px solid #ddd;
-        }
-
-        .badge {
-            display: inline-block;
-            background-color: #e74c3c;
+        .tag {
+            background: #1a3c6e;
             color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            margin-left: 0.5rem;
-            vertical-align: middle;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: #4a7bc8;
+            transform: scale(1.05);
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #1a3c6e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(26, 60, 110, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .floating-btn:hover {
+            background: #4a7bc8;
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #1a3c6e, #4a7bc8);
+            width: 0%;
+            z-index: 101;
+            transition: width 0.3s;
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
-            .container {
-                padding: 0 15px;
+            
+            .header-card, .section {
+                padding: 20px;
             }
-            section {
-                padding: 1.2rem;
+            
+            .industry-tags {
+                justify-content: center;
+            }
+            
+            .floating-btn {
+                bottom: 20px;
+                right: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Обрабатывающая промышленность Иркутской области</h1>
-        <p class="subtitle">Ключевой сектор экономики Восточной Сибири: потенциал, структура и перспективы развития</p>
-    </header>
-
-    <div class="container">
-        <section id="introduction">
-            <h2>Значение отрасли в экономике региона</h2>
-            <p>Обрабатывающая промышленность является <strong>фундаментом экономики</strong> Иркутской области, формируя более 30% валового регионального продукта и обеспечивая занятость значительной части населения. Регион обладает уникальными конкурентными преимуществами:</p>
-            <ul>
-                <li>Мощная энергетическая база (Иркутская ГЭС, Братская ГЭС, Усть-Илимская ГЭС)</li>
-                <li>Богатейшие запасы природных ресурсов (лес, полезные ископаемые)</li>
-                <li>Развитая транспортная инфраструктура (Транссиб, БАМ, федеральные трассы)</li>
-                <li>Крупный научно-образовательный центр (Иркутск)</li>
-            </ul>
-        </section>
-
-        <section id="structure">
-            <h2>Структура и основные подотрасли</h2>
-            <div class="industry-list">
-                <div class="industry-item">
-                    <h4>Цветная металлургия <span class="badge">Ведущая</span></h4>
-                    <p><strong>Иркутский алюминиевый завод (ИркАЗ, RUSAL)</strong> в Шелехове – один из крупнейших в России. Производство первичного алюминия, силуминов, сплавов. Золотодобыча и аффинаж в Бодайбинском районе.</p>
-                </div>
-                <div class="industry-item">
-                    <h4>Нефтепереработка и нефтехимия</h4>
-                    <p><strong>Ангарская нефтехимическая компания (АНХК, "Роснефть")</strong> – гигантский комплекс по производству моторных топлив, масел, параксилола, полипропилена.</p>
-                </div>
-                <div class="industry-item">
-                    <h4>Химическая и фармацевтическая</h4>
-                    <p>Производство каустической соды, хлора, удобрений. <strong>Иркутская фармацевтическая фабрика</strong> – крупный производитель лекарственных средств.</p>
-                </div>
-                <div class="industry-item">
-                    <h4>Лесопромышленный комплекс</h4>
-                    <p>Переработка богатейших лесных ресурсов. Центры: Братск, Усть-Илимск (целлюлоза, картон), Байкальск. Производство пиломатериалов, мебели, пеллет.</p>
-                </div>
-                <div class="industry-item">
-                    <h4>Машиностроение и металлообработка</h4>
-                    <p><strong>Иркутский авиационный завод (Корпорация "Иркут")</strong> – выпуск истребителей Су-30СМ и сборка пассажирского самолета МС-21. Судостроение и горнорудное оборудование.</p>
-                </div>
-                <div class="industry-item">
-                    <h4>Производство стройматериалов</h4>
-                    <p>Цементные заводы (Ангарск, Тайшет), производство ЖБИ, нерудных материалов для booming строительной отрасли.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="stats">
-            <h2>Ключевые показатели</h2>
-            <div class="stats">
-                <div class="stat-card">
-                    <h4>Доля в ВРП</h4>
-                    <p><strong>~32%</strong></p>
-                    <p>Основной формирующий сектор</p>
-                </div>
-                <div class="stat-card">
-                    <h4>Крупные предприятия</h4>
-                    <p><strong>50+</strong></p>
-                    <p>Флагманы региональной промышленности</p>
-                </div>
-                <div class="stat-card">
-                    <h4>Экспортная ориентация</h4>
-                    <p><strong>Высокая</strong></p>
-                    <p>Алюминий, нефтепродукты, целлюлоза</p>
-                </div>
-                <div class="stat-card">
-                    <h4>Занятость</h4>
-                    <p><strong>~25%</strong></p>
-                    <p>Рабочих мест в регионе</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="trends">
-            <h2>Тенденции и вызовы</h2>
-            <div class="highlight">
-                <h3>Положительные тенденции:</h3>
-                <ul>
-                    <li><strong>Модернизация:</strong> Крупные инвестиции в ИркАЗ, АНХК, авиастроение (проект МС-21).</li>
-                    <li><strong>Импортозамещение:</strong> Развитие фармацевтики и гражданского авиастроения.</li>
-                    <li><strong>Кластерный подход:</strong> Формирование алюминиевого, нефтехимического, лесопромышленного кластеров.</li>
-                    <li><strong>Глубокая переработка:</strong> Уход от сырьевой модели (например, развитие производства авиационных сплавов).</li>
-                </ul>
-            </div>
-
-            <div style="background-color: #fff5f5; padding: 1rem; border-radius: 5px; border-left: 3px solid #c0392b;">
-                <h3 style="color: #c0392b;">Проблемы и вызовы:</h3>
-                <ul>
-                    <li><strong>Сырьевая зависимость:</strong> Значительный экспорт продукции низкого передела.</li>
-                    <li><strong>Износ фондов:</strong> Необходимость обновления оборудования на ряде предприятий.</li>
-                    <li><strong>Экологические вопросы:</strong> Особенно в Шелехове (металлургия) и Ангарске (нефтехимия).</li>
-                    <li><strong>Логистика:</strong> Высокие издержки для северных и отдаленных районов.</li>
-                    <li><strong>Кадровый голод:</strong> Дефицит инженеров и высококвалифицированных рабочих.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="prospects">
-            <h2>Перспективы развития</h2>
-            <p>Стратегия развития обрабатывающей промышленности области направлена на преодоление сырьевой модели:</p>
-            <ul>
-                <li><strong>Технологический апгрейд:</strong> Внедрение "Индустрии 4.0", цифровизация производств.</li>
-                <li><strong>Продукция с высокой добавленной стоимостью:</strong> Упор на авиастроение, фармацевтику, сложную химию, биотопливо из отходов лесопереработки.</li>
-                <li><strong>Инфраструктурная поддержка:</strong> Развитие ТОСЭР (территорий опережающего развития), газификация.</li>
-                <li><strong>Зеленая экономика:</strong> Внедрение наилучших доступных технологий (НДТ) для снижения нагрузки на экосистему Байкала.</li>
-                <li><strong>Малый и средний бизнес:</strong> Стимулирование переработки местного сельхозсырья и дикоросов.</li>
-            </ul>
-            <p class="highlight">Иркутская область стоит на пороге перехода от ресурсно-энергетической модели к <strong>инновационно-промышленной</strong>. Успех этого перехода определит не только экономическое лидерство в Восточной Сибири, но и устойчивое развитие всего Байкальского региона.</p>
-        </section>
+    <!-- Анимированный фон -->
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
     </div>
-
-    <footer class="container">
-        <p>© 2023 Информационный портал. Данные основаны на отчетах Минэкономразвития Иркутской области и Росстата.</p>
-        <p>Материал подготовлен для образовательных целей. Актуальность данных: конец 2023 года.</p>
-    </footer>
+    
+    <!-- Прогресс бар -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Шапка сайта -->
+    <div class="header-card">
+        <h1><i class="fas fa-industry"></i> Обрабатывающая промышленность Иркутской области</h1>
+        <div class="author">
+            <i class="fas fa-user-graduate"></i> Работу выполнил: Кочевов Кирилл Денисович
+        </div>
+        <div class="subject">
+            9 класс • Проект по географии • ГИО
+        </div>
+    </div>
+    
+    <!-- Основное содержимое -->
+    <div class="main-content">
+        <!-- Раздел 1 -->
+        <div class="section">
+            <div class="section-icon"><i class="fas fa-star"></i></div>
+            <h2><i class="fas fa-bullseye"></i> Главное значение</h2>
+            <p>Это <strong>основная отрасль</strong> экономики нашего региона. Дает много рабочих мест и денег в бюджет.</p>
+            <div class="fact-box">
+                Формирует более 30% всего ВРП (валового регионального продукта) Иркутской области
+            </div>
+        </div>
+        
+        <!-- Раздел 2 -->
+        <div class="section">
+            <div class="section-icon"><i class="fas fa-cogs"></i></div>
+            <h2><i class="fas fa-list"></i> Основные виды промышленности</h2>
+            
+            <div class="highlight">
+                <strong>1. Металлургия</strong> - самая важная
+                <p>• Иркутский алюминиевый завод (ИркАЗ) в Шелехове</p>
+                <p>• Производство алюминия для самолетов и машин</p>
+            </div>
+            
+            <div class="highlight">
+                <strong>2. Нефтехимия</strong>
+                <p>• Ангарская нефтехимическая компания (АНХК)</p>
+                <p>• Делают бензин, пластмассы, удобрения</p>
+            </div>
+            
+            <div class="highlight">
+                <strong>3. Лесная промышленность</strong>
+                <p>• Братск, Усть-Илимск - центры переработки леса</p>
+                <p>• Производят бумагу, картон, доски</p>
+            </div>
+            
+            <div class="highlight">
+                <strong>4. Машиностроение</strong>
+                <p>• Иркутский авиазавод делает самолеты</p>
+                <p>• Собирают новый пассажирский самолет МС-21</p>
+            </div>
+            
+            <div class="industry-tags">
+                <div class="tag"><i class="fas fa-hard-hat"></i> Металлургия</div>
+                <div class="tag"><i class="fas fa-oil-can"></i> Нефтехимия</div>
+                <div class="tag"><i class="fas fa-tree"></i> Леспром</div>
+                <div class="tag"><i class="fas fa-plane"></i> Авиастроение</div>
+                <div class="tag"><i class="fas fa-pills"></i> Фармацевтика</div>
+            </div>
+        </div>
+        
+        <!-- Раздел 3 -->
+        <div class="section">
+            <div class="section-icon"><i class="fas fa-chart-line"></i></div>
+            <h2><i class="fas fa-lightbulb"></i> Интересные факты</h2>
+            <ul>
+                <li>Иркутская область производит <strong>15% всего российского алюминия</strong></li>
+                <li>Ангарский завод - один из <strong>крупнейших в стране</strong> по переработке нефти</li>
+                <li>Наши леса занимают площадь больше, чем некоторые европейские страны</li>
+                <li>Иркутский авиазавод выпускает истребители, которые летают в разных странах мира</li>
+                <li>Благодаря дешевой электроэнергии от ГЭС, производство здесь очень выгодное</li>
+            </ul>
+        </div>
+        
+        <!-- Раздел 4 -->
+        <div class="section">
+            <div class="section-icon"><i class="fas fa-eye"></i></div>
+            <h2><i class="fas fa-tasks"></i> Проблемы и перспективы</h2>
+            
+            <div class="fact-box" style="border-left-color: #e74c3c;">
+                <strong>Проблемы:</strong>
+                <p>1. Старое оборудование на некоторых заводах</p>
+                <p>2. Экологические вопросы (особенно около Байкала)</p>
+                <p>3. Мало перерабатывают сырье до готовых товаров</p>
+            </div>
+            
+            <div class="fact-box" style="border-left-color: #2ecc71;">
+                <strong>Будущее развитие:</strong>
+                <p>1. Модернизация заводов</p>
+                <p>2. Больше перерабатывать, а не просто добывать</p>
+                <p>3. Делать самолеты, лекарства, новые материалы</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Плавающая кнопка -->
+    <a href="#" class="floating-btn" id="topBtn">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <script>
+        // Прогресс бар при скролле
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+        
+        // Кнопка "Наверх"
+        const topBtn = document.getElementById('topBtn');
+        topBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Показ/скрытие кнопки
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                topBtn.style.opacity = '1';
+            } else {
+                topBtn.style.opacity = '0';
+            }
+        });
+        
+        // Анимация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'opacity 0.5s, transform 0.5s';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+        
+        // Случайное изменение цвета тегов при клике
+        const tags = document.querySelectorAll('.tag');
+        const colors = ['#1a3c6e', '#4a7bc8', '#2ecc71', '#e74c3c', '#9b59b6', '#f39c12'];
+        
+        tags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                this.style.background = randomColor;
+                
+                // Вращение иконки
+                const icon = this.querySelector('i');
+                icon.style.transform = 'rotate(360deg)';
+                icon.style.transition = 'transform 0.5s';
+                
+                setTimeout(() => {
+                    icon.style.transform = 'rotate(0deg)';
+                }, 500);
+            });
+        });
+    </script>
 </body>
-                    </html>
+</html>
