@@ -3,382 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обрабатывающая промышленность Иркутской области</title>
+    <title>The Ideal Neighbour - English Essay</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Georgia', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
             padding: 20px;
-            max-width: 1000px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-        }
-
-        /* Легкий водяной узор на фоне */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(41, 128, 185, 0.05) 0%, transparent 20%);
-            z-index: -1;
-        }
-
-        /* Заголовок */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-left: 6px solid #2980b9;
-        }
-
-        h1 {
-            color: #2c3e50;
-            font-size: 2.4rem;
-            margin-bottom: 10px;
-            font-weight: normal;
-        }
-
-        .subtitle {
-            color: #7f8c8d;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px dashed #ddd;
-        }
-
-        /* Автор */
-        .author {
-            display: inline-block;
-            padding: 8px 20px;
-            background: #ecf0f1;
-            border-radius: 25px;
-            font-size: 1rem;
-            margin: 15px 0;
-            color: #34495e;
-        }
-
-        /* Основные разделы */
-        .section {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-
-        .section::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, #3498db, #2980b9);
+        
+        .header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
         }
-
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        
+        .author {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
         h2 {
-            color: #2980b9;
+            color: #2c3e50;
             margin-bottom: 15px;
             font-size: 1.5rem;
-            font-weight: normal;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #ecf0f1;
+            padding-left: 15px;
+            border-left: 4px solid #4b6cb7;
         }
-
-        /* Выделенные блоки */
-        .important-box {
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .highlight {
             background: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 18px;
+            padding: 20px;
+            border-radius: 8px;
             margin: 20px 0;
-            border-radius: 0 8px 8px 0;
+            border-left: 4px solid #3498db;
             font-style: italic;
         }
-
-        /* Список */
-        ul {
-            padding-left: 20px;
-            margin: 15px 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 5px;
-        }
-
-        li::marker {
-            color: #3498db;
-        }
-
-        /* Цветные акценты */
-        .highlight {
-            background: linear-gradient(90deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0.05) 100%);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid rgba(52, 152, 219, 0.2);
-        }
-
-        /* Простая сетка для фактов */
-        .facts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .fact-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #ecf0f1;
-            transition: transform 0.2s;
-        }
-
-        .fact-item:hover {
-            transform: translateY(-3px);
-            border-color: #3498db;
-        }
-
-        .fact-number {
-            font-size: 1.8rem;
-            color: #2980b9;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        /* Легкие теги */
-        .tags {
+        
+        .keywords {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 15px;
+            margin: 20px 0;
         }
-
-        .tag {
-            background: #ecf0f1;
+        
+        .keyword {
+            background: #e8f4fc;
             color: #2c3e50;
-            padding: 6px 12px;
-            border-radius: 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            transition: all 0.2s;
+            border: 1px solid #d1ecf1;
         }
-
-        .tag:hover {
-            background: #3498db;
-            color: white;
+        
+        .conclusion {
+            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 2px solid #dfe6e9;
         }
-
-        /* Контрастные блоки */
-        .problem {
-            background: #fff5f5;
-            border-left-color: #e74c3c;
-        }
-
-        .solution {
-            background: #f0fff4;
-            border-left-color: #27ae60;
-        }
-
-        /* Футер */
+        
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            border-top: 1px solid #ecf0f1;
+            padding: 25px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 30px;
         }
-
-        /* Адаптивность */
+        
+        .student-info {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .student-info strong {
+            color: #4b6cb7;
+        }
+        
         @media (max-width: 768px) {
-            body {
-                padding: 15px;
+            .container {
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
             }
             
             h1 {
                 font-size: 1.8rem;
             }
             
-            .section {
-                padding: 20px;
+            .content {
+                padding: 25px;
             }
             
-            .facts {
-                grid-template-columns: 1fr;
+            .section {
+                margin-bottom: 25px;
+                padding-bottom: 20px;
             }
-        }
-
-        /* Простая анимация появления */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section {
-            animation: fadeIn 0.5s ease-out;
         }
     </style>
 </head>
 <body>
-    <!-- Шапка -->
-    <div class="header">
-        <h1>Обрабатывающая промышленность Иркутской области</h1>
-        <div class="author">Сообщение подготовил: Кочевов Кирилл Денисович, 9 класс</div>
-        <div class="subtitle">Учебное сообщение по географии</div>
-    </div>
-
-    <!-- Раздел 1: Значение -->
-    <div class="section">
-        <h2>Значение для региона</h2>
-        <p>Обрабатывающая промышленность — это основа экономики Иркутской области. Она даёт работу тысячам людей и приносит значительный доход в бюджет.</p>
-        
-        <div class="important-box">
-            Более 30% регионального продукта создаётся именно в обрабатывающей промышленности.
+    <div class="container">
+        <div class="header">
+            <h1>The Ideal Neighbour</h1>
+            <div class="subtitle">An English Language Essay</div>
+            <div class="author">Written by a 9th grade student</div>
         </div>
         
-        <div class="facts">
-            <div class="fact-item">
-                <div class="fact-number">30%</div>
-                <div>Доля в экономике</div>
-            </div>
-            <div class="fact-item">
-                <div class="fact-number">15%</div>
-                <div>Российского алюминия</div>
-            </div>
-            <div class="fact-item">
-                <div class="fact-number">50+</div>
-                <div>Крупных предприятий</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Раздел 2: Основные отрасли -->
-    <div class="section">
-        <h2>Основные отрасли</h2>
-        
-        <div class="highlight">
-            <strong>Цветная металлургия</strong>
-            <p>Иркутский алюминиевый завод (ИркАЗ) в Шелехове — один из крупнейших в стране.</p>
-        </div>
-        
-        <div class="highlight">
-            <strong>Нефтепереработка</strong>
-            <p>Ангарская нефтехимическая компания производит топливо и пластики.</p>
-        </div>
-        
-        <div class="highlight">
-            <strong>Лесная промышленность</strong>
-            <p>Братск и Усть-Илимск — центры по производству бумаги и картона.</p>
-        </div>
-        
-        <div class="highlight">
-            <strong>Машиностроение</strong>
-            <p>Иркутский авиазавод создаёт самолёты, включая новый МС-21.</p>
-        </div>
-
-        <div class="tags">
-            <div class="tag">Металлургия</div>
-            <div class="tag">Нефтехимия</div>
-            <div class="tag">Лесопром</div>
-            <div class="tag">Машиностроение</div>
-            <div class="tag">Энергетика</div>
-        </div>
-    </div>
-
-    <!-- Раздел 3: Особенности -->
-    <div class="section">
-        <h2>Особенности и преимущества</h2>
-        <ul>
-            <li>Дешёвая электроэнергия от мощных ГЭС</li>
-            <li>Богатые природные ресурсы</li>
-            <li>Удобное транспортное положение (Транссиб)</li>
-            <li>Квалифицированные рабочие кадры</li>
-            <li>Научный потенциал Иркутска</li>
-        </ul>
-        
-        <div class="important-box">
-            Благодаря каскаду ГЭС область имеет самую дешёвую электроэнергию в России, что выгодно для производства.
-        </div>
-    </div>
-
-    <!-- Раздел 4: Проблемы и перспективы -->
-    <div class="section">
-        <h2>Текущие вызовы и будущее</h2>
-        
-        <div class="highlight problem">
-            <strong>Существующие проблемы:</strong>
-            <p>• Часть оборудования требует обновления</p>
-            <p>• Экологические вопросы в байкальском регионе</p>
-            <p>• Сырьевой характер многих производств</p>
-        </div>
-        
-        <div class="highlight solution">
-            <strong>Направления развития:</strong>
-            <p>• Модернизация производств</p>
-            <p>• Глубокая переработка вместо добычи</p>
-            <p>• Развитие высоких технологий</p>
-            <p>• Внимание к экологии</p>
-        </div>
-        
-        <p style="margin-top: 15px;">Иркутская область имеет все возможности для перехода от сырьевой экономики к перерабатывающей с высокой добавленной стоимостью.</p>
-    </div>
-
-    <!-- Футер -->
-    <footer>
-        <p>Учебное сообщение по географии Иркутской области</p>
-        <p style="margin-top: 5px; font-size: 0.85rem;">Использованы данные открытых источников</p>
-    </footer>
-
-    <script>
-        // Простой скрипт для плавного появления элементов
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            
-            sections.forEach((section, index) => {
-                // Небольшая задержка для последовательного появления
-                setTimeout(() => {
-                    section.style.opacity = '1';
-                }, 100 * index);
-            });
-            
-            // Легкий эффект при наведении на теги
-            const tags = document.querySelectorAll('.tag');
-            tags.forEach(tag => {
-                tag.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.05)';
-                });
+        <div class="content">
+            <div class="section">
+                <h2>Introduction</h2>
+                <p>A good neighbour can transform a simple living space into a true home and turn an ordinary street into a warm community. In my view, an ideal neighbour represents a perfect balance of several important qualities: friendliness, respect, reliability, and understanding. This person makes the neighbourhood a better place simply by being there.</p>
                 
-                tag.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                });
-            });
-        });
-    </script>
+                <div class="keywords">
+                    <div class="keyword">Friendliness</div>
+                    <div class="keyword">Respect</div>
+                    <div class="keyword">Reliability</div>
+                    <div class="keyword">Community</div>
+                    <div class="keyword">Understanding</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Key Qualities of a Perfect Neighbour</h2>
+                <p>First and foremost, the perfect neighbour is <strong>considerate and respectful</strong>. They understand that living in close proximity to others requires awareness of boundaries. They keep noise levels reasonable, especially during late evenings and early mornings. They maintain their property well—keeping their garden tidy, their rubbish properly contained, and their home presentable. This shows respect not only for their own space but for the shared environment and everyone who lives nearby.</p>
+                
+                <p>Simple gestures make a big difference. A warm smile, a friendly greeting when passing by, or a brief chat about the weather creates a positive atmosphere without being intrusive. This kind of neighbour recognizes that everyone has different schedules and lifestyles, and they adapt accordingly.</p>
+                
+                <div class="highlight">
+                    "Good neighbours are like invisible guardians of our daily peace. They're present when needed, quiet when appropriate, and friendly without being overwhelming."
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Reliability and Helpfulness</h2>
+                <p>The ideal neighbour is <strong>reliable and helpful</strong>, but never overbearing. This is the person you could trust with a spare key to water your plants while you're on vacation, or to collect your mail and packages. They're the ones who offer help when they see you struggling with heavy grocery bags, yet they never pry into your personal affairs or make you feel obligated to socialize constantly.</p>
+                
+                <p>This reliability creates a sense of security. Knowing that someone trustworthy lives next door provides peace of mind. Whether it's keeping an eye on your home during your absence or simply being available in case of emergency, this quality is invaluable. The perfect neighbour helps when genuinely needed but respects your independence and privacy.</p>
+            </div>
+            
+            <div class="section">
+                <h2>Community Spirit</h2>
+                <p>Finally, an ideal neighbour possesses a sense of <strong>community spirit</strong>. They might occasionally organize a neighbourhood gathering, participate in local clean-up days, or simply share useful information about community events. They respect diversity in lifestyles, beliefs, and routines while fostering a gentle sense of belonging.</p>
+                
+                <p>This neighbour understands that a community thrives on small acts of kindness and mutual respect. They might bring over extra produce from their garden or notify you about suspicious activity in the area. Their actions contribute to making the neighbourhood not just a collection of houses, but a place where people look out for one another.</p>
+            </div>
+            
+            <div class="conclusion">
+                <h2>Conclusion</h2>
+                <p>In conclusion, an ideal neighbour is not necessarily a best friend, but rather a <strong>respectful, trustworthy, and pleasant presence</strong> nearby. They master the delicate balance between friendliness and discretion, between being available and respecting boundaries. Such neighbours create an environment where everyone feels safe, respected, and quietly connected.</p>
+                
+                <p>Living next to such a person makes daily life more pleasant and secure. They remind us that communities are built not on grand gestures, but on consistent small acts of consideration and kindness. In the end, good neighbours are the invisible foundation of a happy home and a harmonious neighbourhood.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="student-info">
+                <p><strong>Made by:</strong> 9th grade student Kochevov Kirill Denisovich</p>
+                <p><strong>Subject:</strong> English Language</p>
+                <p><strong>School project</strong> • Essay writing</p>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
